@@ -1,0 +1,5 @@
+.equal-dimensions {
+    width: 100px;  /* Set your desired width */
+    height: 100px; /* Set your desired height */
+    object-fit: cover; /* This ensures the image covers the specified width and height without distortion */
+}

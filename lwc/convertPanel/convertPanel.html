@@ -1,0 +1,116 @@
+<template>
+    <lightning-card title="Convert Account">
+        <div class="slds-m-around_xx-small">
+        
+            <div if:false={isLoaded}>
+                <lightning-spinner variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+              </div>
+
+        <span>
+            <lightning-record-edit-form
+            object-api-name={objectApiName}
+            record-id={recordId}
+            >
+           
+            <div class="slds-grid slds-theme_shade slds-p-around_x-small">
+                <div class="slds-col slds-section__title">
+                    <span class="slds-truncate slds-p-horizontal_small"
+                    title="Account">Account</span>
+                </div>
+                <div class="slds-col">
+                    <lightning-radio-group name='rgAccount' 
+                        class="slds-float_right"
+                        label="Account"
+                        variant="label-hidden"
+                        options={accountOptions}
+                        value={accountOptionId}
+                        onchange={handleAccountOptionChange}
+                        type="button"></lightning-radio-group>
+                </div>
+            </div>
+        
+          
+            <template if:true={ISNewAccount}>
+                <lightning-tabset>
+                    <lightning-tab label="Basic Details">
+                        <div class="slds-grid slds-gutters slds-wrap">
+                              <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                                <lightning-input-field id={annualRevenue} field-name={annualRevenue}></lightning-input-field>
+                              </div>
+                              <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                                <lightning-input-field id={customerPriority} field-name={customerPriority}></lightning-input-field>
+                              </div>
+                              <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                                <lightning-input-field id={type} field-name={type}></lightning-input-field>
+                              </div>
+                              <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                                <lightning-input-field id={numberOFEmployee} field-name={numberOFEmployee}></lightning-input-field>
+                              </div>
+                        
+
+                            </div>
+                    </lightning-tab>
+                    <lightning-tab label="Billing Address" title="2nd tab extended title">
+                        <div class="slds-grid slds-gutters slds-wrap">
+                            <div class="slds-col slds-size_3-of-3 slds-large-size_2-of-2">
+                              <lightning-input-field id={billingAddress} field-name={billingAddress}></lightning-input-field>
+                            </div>
+
+                          </div>
+                    </lightning-tab>
+                    <lightning-tab label="Shipping Address">
+                        <div class="slds-grid slds-gutters slds-wrap">
+                            <div class="slds-col slds-size_3-of-3 slds-large-size_2-of-2">
+                              <lightning-input-field id={shippingAddress} field-name={shippingAddress}></lightning-input-field>
+                            </div>
+
+                          </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </template>
+             
+           
+            <div class="slds-m-around_xx-small">
+                <lightning-input-field id={name} field-name={name}></lightning-input-field>
+            </div>
+        
+            <div class="slds-grid slds-theme_shade slds-p-around_x-small">
+
+                <div class="slds-col slds-section__title">
+                 <span>User</span>
+
+                </div>
+                <div class="slds-col">
+                    <lightning-radio-group name='COntact' 
+                    class="slds-float_right"
+                    label="Contact"
+                    variant="label-hidden"
+                    options={ConatactOption}
+                    value={ConatctOptionId}
+                    onchange={handleContactOptionChange}
+                    type="button"></lightning-radio-group>
+                </div>
+
+            </div>
+            <div class="slds-m-around_xx-small">
+                <lightning-input-field id={user} field-name={user}></lightning-input-field>
+            </div>
+
+            <div class="slds-m-around_xx-small">
+                <lightning-input-field id={phone} field-name={phone}></lightning-input-field>
+            </div>
+
+            </lightning-record-edit-form>
+
+        </span>
+    </div>
+        <div slot="footer">
+            <lightning-button class="slds-button" variant="neutral" label="Cancel"
+            onclick={handleCancel}></lightning-button>
+            <lightning-button class="slds-button slds-m-left_x-small" variant="brand" label="Convert" type="Submit"
+            disabled={isButtonDisabled} onclick={handleSave}></lightning-button>
+        </div>
+
+       
+    </lightning-card>
+</template>

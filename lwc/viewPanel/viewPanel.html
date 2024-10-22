@@ -1,0 +1,66 @@
+<template>
+    <lightning-card title="View Panel">
+        <div class="slds-m-around_xx-small">
+            <div class="slds-grid slds-theme_shade slds-p-around_x-small">
+                <div class="slds-col slds-section__title">
+                    <span class="slds-truncate slds-p-horizontal_small"
+                    title="Account">
+                    <lightning-radio-group name='rgAccount' 
+                    class="slds-float_right"
+                    label="Account"
+                    variant="label-hidden"
+                    options={accountOptions}
+                    value={accountOptionId}
+                    onchange={handleAccountOptionChange}
+                    type="button"></lightning-radio-group>
+                </span>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="checkbox" label="Out of Stock" name="input1"
+                            onchange={handleOutOfStockChange}></lightning-input>
+                </div>
+            </div>
+
+            <div class="slds-m-around_xx-small">
+                <div class="slds-grid slds-theme_shade slds-p-around_x-small">
+                    <div class="slds-col slds-section__title">
+                        <span class="slds-truncate slds-p-horizontal_small"
+                        title="Account">
+                        Stock View
+                    </span>
+                    </div>
+                 
+                        <lightning-input 
+                         type="text"
+                        label="Filter" 
+                      onkeyup={handleFilter} 
+                      placeholder="Search"
+                       value={filterBy}>
+                </lightning-input>
+                    
+                </div>
+            </div>
+            <div class="slds-m-around_xx-small">
+                <template if:true={oppoData}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={oppoData}
+                        columns={columns}
+                        onsave={handleSave}
+                        oncancel={handleCancel}
+                       draft-values={draftValues}
+                      hide-checkbox-column
+
+                     ></lightning-datatable>
+                   
+                   </template>
+            </div>
+            <!-- <div slot="footer" class="slds-grid slds-grid_align-end">
+                <lightning-button class="slds-button" variant="neutral" label="Cancel"  disabled={isButtonDisabled}
+                    onclick={handleCancelData}></lightning-button>
+                <lightning-button class="slds-button slds-m-left_x-small" variant="brand" label="Save" type="Submit"
+                    disabled={isButtonDisabled} onclick={handleSaveData}></lightning-button>
+            </div> -->
+        </div>
+    </lightning-card>
+</template>

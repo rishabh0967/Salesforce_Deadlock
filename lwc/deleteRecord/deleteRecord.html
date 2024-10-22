@@ -1,0 +1,95 @@
+<template>
+    
+        <lightning-quick-action-panel header="Delete Records">
+        
+        <div >
+            <lightning-layout>
+                <!-- Filter By Combobox -->
+                <lightning-layout-item size="2" padding="around-small">
+                    <lightning-combobox
+                        name="filterByCombo"
+                        label="Filter By"
+                        value={filterByCombo}
+                        placeholder="Select Field"
+                        options={options}
+                        onchange={handleChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <!-- Filter Input -->
+                <lightning-layout-item size="2" padding="around-small">
+                    <lightning-input
+                         icon-name="utility:search"
+                        label="Filter"
+                        type="search"
+                        value={filterBy}
+                        placeholder="search..." 
+                        class="custom-input"
+                        onkeyup={handleFilter}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <!-- Filter By SOQL Query Textarea -->
+                <lightning-layout-item size="4" padding="around-small">
+                    <lightning-textarea
+                        label="Filter By SOQL Query"
+                        placeholder="WHERE Name = 'Rishabh'" 
+                        value={filterBy}
+                        class="custom-textarea"
+                        onkeyup={filterByQuery}>
+                    </lightning-textarea>
+                </lightning-layout-item>
+
+                <!-- Helptext and Search Button -->
+                <lightning-layout-item size="2" padding="around-small">
+                    <lightning-helptext content="Click here to filter Records By SOQL Query"></lightning-helptext>
+                    <div>
+                        <lightning-button 
+                            class="slds-m-around_xx-small custom-search-button"
+                            icon-name="utility:search"
+                            onclick={handleSearch}
+                            type="Search"
+                            variant="brand"
+                            label="Search">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <!-- Data Table -->
+            <div class="slds-m-around_xx-small">
+                <template if:true={WireData}>
+                    <div class="myTable">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={WireData}
+                        columns={allChildObjectColumns}
+                        show-row-number-column="true"
+                        onrowselection={handleRowSelection}
+                        selected-rows={selectedRows}
+                        >
+                    </lightning-datatable>
+                    </div>
+                </template>
+                <template if:true={error}>
+                    <p class="slds-text-color_error">Error: {error}</p>
+                </template>
+            </div>
+
+            <!-- Footer with Delete Button -->
+            <p slot="footer" class="slds-text-align_right custom-footer">
+                <lightning-button
+                icon-name="utility:delete"
+                    variant="destructive"
+                    label="Delete Records"
+                    title="Delete Records"
+                    class="slds-m-left_x-small custom-delete-button"
+                    type="submit"
+                    onclick={handleDeleteRecords}
+                    disabled={isButtonDisabled}>
+                </lightning-button>
+            </p>
+        </div>
+        </lightning-quick-action-panel>
+  
+</template>

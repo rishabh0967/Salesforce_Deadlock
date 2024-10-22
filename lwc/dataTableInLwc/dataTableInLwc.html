@@ -1,0 +1,110 @@
+<template>
+    <lightning-card title="Data Table">
+     
+            <lightning-flow
+                flow-api-name='Survey_customers'
+                flow-input-variables={inputVariables}
+                onstatuschange={handleStatusChange}
+            >
+            </lightning-flow>
+       
+        <lightning-select
+        name="pies"
+        label="Select your pies"
+        value={value}
+        options={options}
+        onchange={handleChange}
+        multiple
+        size="3"></lightning-select>
+
+<p>Selected pies: </p>
+        <lightning-record-picker
+        label="Accounts"
+        placeholder="Search Accounts..."
+        object-api-name="Account"
+    >
+    </lightning-record-picker>
+      
+            <p>This example creates a simple layout with field headers.</p>
+        <div class="c-container">
+            <lightning-layout>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Field 1">Field 1</p>
+                        <p>Name</p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Field2 (3)">Field 2 (3)
+                            <lightning-button-icon icon-name="utility:down" variant="border-filled" size="small" alternative-text="More Actions"></lightning-button-icon>
+                        </p>
+                        <p>Eligibility</p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Field 3">Field 3</p>
+                        <a href="#">Website</a>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Field 4">Field 4</p>
+                        <p>
+                            <span title="">Address</span>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+   
+    
+        <div class="slds-grid slds-theme_shade slds-p-around_x-small">
+            hii
+            <div class="slds-col slds-section__title">
+          
+            </div>
+
+        </div>
+
+
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+           Hello Rishabh
+            </div>
+            <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                Hello Rishabh
+                 </div>
+                 <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                    Hello Rishabh
+                     </div>
+                     <div class="slds-col slds-size_3-of-3 slds-large-size_1-of-2">
+                        Hello Rishabh
+                         </div>
+          </div>
+        <div class="slds-grid slds-gutters">
+          <div class ="slds-col slds-size_3-of-3 slds-large-size_1-of-2"></div>
+          div wihfohw
+        </div>
+        <div class="slds-m-around_xx-small">
+            <template if:true={data}>
+                <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    draft-values={draftValues}
+                    onsave={handleSave}
+                    oncancel={handleCancel}
+                    hide-checkbox-column
+                    >
+                </lightning-datatable>
+            </template>
+            <template if:true={error}>
+                <div class="slds-text-color_error">
+                    Error loading data: {error}
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

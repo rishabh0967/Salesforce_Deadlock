@@ -1,0 +1,4 @@
+
+<aura:component>
+    <c:deleteRecord /> 
+</aura:component>

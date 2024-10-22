@@ -1,0 +1,100 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_xx-small">
+
+            <div if:false={isLoaded}>
+                <lightning-spinner variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+              </div>
+              <div class="slds-m-top_medium slds-m-bottom_x-large">
+                <div class="slds-p-around_medium lgc-bg">
+                    <lightning-tile label="Lightning component team" type="media">
+                        <lightning-icon slot="media" icon-name="standard:groups"></lightning-icon>
+                        <p class="slds-truncate" title="7 Members">Vehicle Selections</p>
+                    </lightning-tile>
+                </div>
+            </div>
+        <template if:true={getTwoWheelrs}>
+        
+            <div class="slds-m-around_medium">
+                <img src={TWOwHEELERSPIC} alt="Two Wheelers" class="equal-dimensions">
+               
+            </div>
+    </template>
+    <template if:true={getThreeWheelrs}>
+        
+        <div class="slds-m-around_medium">
+            <img src={threewHEELERSPIC} alt="Three Wheelers" class="equal-dimensions">
+           
+        </div>
+</template>
+<template if:true={getFourWheelrs}>
+        
+    <div class="slds-m-around_medium">
+        <img src={fourwHEELERSPIC} alt="Four Wheelers" class="equal-dimensions">
+       
+    </div>
+</template>
+            <lightning-tabset active-tab-value={activeTabValue}>
+                <lightning-tab class="TwoWheeler" label="Two Wheelers" value="TwoWheeler"   onactive={handleActive}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <template if:true={twoWheelersData}>
+                            <lightning-layout multiple-rows class="slds-p-around_xx-small slds-m-left_medium">
+                          <template for:each={twoWheelersData} for:item="item">
+                                    <lightning-layout-item key={item.Id} size="3" class="slds-p-around_xx-small">
+                                        <div class="header-column">
+                                            <lightning-input   class="slds-m-around_xx-small slds-m-left_small"  type="checkbox-button" label="Input One" name={item.Id}  onchange={handleVehicleChange} ></lightning-input>
+                                            <p>{item.Name}</p>
+                                            <p>{item.VehicleType__c}</p>
+                                        </div>
+                                    </lightning-layout-item>
+                            </template>
+                                </lightning-layout>   
+                        </template>                       
+                        </div>
+                </lightning-tab>
+                <lightning-tab class="ThreeWheeler" label="Three Wheelers" value="ThreeWheeler"   onactive={handleActive}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <template if:true={fourWHeeleresData}>
+                            <lightning-layout multiple-rows class="slds-p-around_xx-small slds-m-left_medium">
+                          <template for:each={fourWHeeleresData} for:item="item">
+                                    <lightning-layout-item key={item.Id} size="3" class="slds-p-around_xx-small">
+                                        <div class="header-column">
+                                            <lightning-input class="slds-m-around_xx-small" type="checkbox-button" label="Input One" name={item.Id}  onchange={handleVehicleChange} ></lightning-input>
+                                            <p>{item.Name}</p>
+                                            <p>{item.VehicleType__c}</p>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                                </lightning-layout>   
+                        </template>                       
+                        </div>
+                </lightning-tab>
+                <lightning-tab  class="FourWheeler"  label="Four Wheelers" value="FourWheeler"  onactive={handleActive}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <template if:true={twoWheelersData}>
+                            <lightning-layout multiple-rows class="slds-p-around_xx-small slds-m-left_medium">
+                          <template for:each={twoWheelersData} for:item="item">
+                                    <lightning-layout-item key={item.Id} size="3" class="slds-p-around_xx-small">
+                                        <div class="header-column">
+                                            <lightning-input class="slds-m-around_xx-small" type="checkbox-button" label="Input One" name={item.Id}  onchange={handleVehicleChange} ></lightning-input>
+                                            <p>{item.Name}</p>
+                                            <p>{item.VehicleType__c}</p>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                                </lightning-layout>   
+                        </template>                       
+                        </div>
+                </lightning-tab>
+            </lightning-tabset>
+
+            <div slot="footer" class="slds-grid slds-grid_align-end">
+                <lightning-button class="slds-button" variant="neutral" label="Cancel"  disabled={isButtonDisabled}
+                    onclick={handleCancel}></lightning-button>
+                <lightning-button class="slds-button slds-m-left_x-small" variant="brand" label="Save" type="Submit"
+                    disabled={isButtonDisabled} onclick={handleSave}></lightning-button>
+            </div>
+            
+        </div>
+    </lightning-card>
+</template>

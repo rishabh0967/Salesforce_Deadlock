@@ -1,0 +1,185 @@
+<template>
+    <lightning-quick-action-panel header="Data Game">   
+      
+            <div class="slds-m-around_xx-small">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-2">
+            <span>
+                <lightning-layout>
+                    <lightning-layout-item size="2" >
+                        <label class="slds-p-right_x-small">Action</label>  
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" >
+                        <lightning-combobox
+                        name="filterByCombo"
+                        value={filterByCombo}
+                        placeholder="Select Field"
+                        options={options}
+                        onchange={handleChange}>
+                    </lightning-combobox>
+                    </lightning-layout-item>
+                    
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="2" >
+                        <label class="slds-p-right_x-small">Object</label>  
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" >
+                        <lightning-combobox
+                        name="ObjectNames"
+                        value={filterObjects}
+                        placeholder="Select Field"
+                        options={getAllObjectsOptions}
+                        onchange={handleObjectsChange}>
+                    </lightning-combobox>
+                    </lightning-layout-item>  
+                    
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="2" >
+                        <label class="slds-p-right_x-small">Format</label>  
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" >
+                        <div class="radio-group-container">
+                        <lightning-radio-group name="radioGroup"
+                        label="Radio Group"
+                        options={getFormatOptions}
+                        value={formatValue}
+                        onchange={handleFormatChange}
+                        type="radio">
+                    </lightning-radio-group>
+                    </div>
+                    </lightning-layout-item>  
+                    
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="2" >
+                        <label class="slds-p-right_x-small">Data</label>  
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" >
+                      <!-- <lightning-textarea
+                        label=""
+                        placeholder={filterCsvExcel} 
+                        onkeyup={filterByQuery}>
+                    </lightning-textarea>--> 
+                    <lightning-textarea
+                    label="Paste Excel Data"
+                    placeholder={filterCsvExcel}
+                    onpaste={handlePaste}>
+                </lightning-textarea>
+                    </lightning-layout-item>  
+                    
+                </lightning-layout>
+
+                <lightning-layout>
+                    <lightning-layout-item size="2">
+                        <label class="slds-p-right_x-small">Batch Size</label>  
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" >
+                        <lightning-input type="number" name="input1" 
+                        value={batchInputValue} onchange={handleBatchChange}
+                        placeholder="Enter a number">
+                        </lightning-input>
+                    </lightning-layout-item>  
+                    
+                </lightning-layout>
+                <div class="slds-m-around_small">
+                <lightning-layout>
+                    <lightning-layout-item size="2">
+                       
+                    </lightning-layout-item>
+                    <lightning-layout-item size="10" padding="around-small">
+                        <p>
+                            <lightning-button variant="brand" label="Import" title="Import" class="slds-m-left_x-small" type="submit"   onclick={handleImportRecords}>></lightning-button>
+                            <lightning-button variant="brand" label="Cancel queued" title="Cancel queued" class="slds-m-left_x-small" type="submit" ></lightning-button>
+                            <lightning-button variant="brand" label="Retry Failed" title="Retry Failed" class="slds-m-left_x-small" type="submit" onclick={handleRetry} ></lightning-button>
+                        </p>
+                     </lightning-layout-item> 
+                      
+                    <lightning-layout-item >
+               
+            </lightning-layout-item>  
+            </lightning-layout>
+        </div>
+                <div class="slds-m-around_small">
+
+            <lightning-layout>
+                <lightning-layout-item size="2">
+                    <label class="slds-p-right_x-small">Status</label>  
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2" >
+                    <p>
+                        <lightning-input type="checkbox" label="Succeeded" name="Success" checked onchange={handleSuccessfailData}></lightning-input>
+                    </p>
+                 </lightning-layout-item>  
+                 <lightning-layout-item size="2" >
+                    <p>
+                        <lightning-input type="checkbox" label="Failed" name="Failed" checked onchange={handleSuccessfailData}></lightning-input>
+                    </p>
+                 </lightning-layout-item>  
+                
+            </lightning-layout>
+        </div>
+            </span>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <h1>Field mapping</h1>
+                <template if:true={headerData}>
+                    <ol>
+                        <template for:each={headerData} for:item="acc">
+                            <li key={acc.Id}>
+                                <lightning-input 
+                                    name={acc} 
+                                    value={acc} 
+                                    onchange={handleFieldValue} 
+                                  >
+                                </lightning-input>
+                              <!-- <template if:true={getFieldCorrectly}>
+                                <p class="slds-text-color_error slds-m-top_x-small"> API name  is not valid.</p>
+                                </template>--> 
+                            </li>                  
+                        </template>
+                    </ol>
+                </template>
+              <!--  <template if:true={showError}>
+                    <div class="slds-text-color_error slds-m-top_x-small">
+                        {errorMessage}
+                    </div>
+                </template>-->
+            </div>
+            
+        </div> 
+         
+   
+    <div class="slds-m-around_xx-small">
+        <template if:true={excelData}>
+            <div class="myTable">
+            <lightning-datatable
+                key-field="Id"
+                data={excelData}
+                columns={getColumn}
+                hide-checkbox-column="true"
+                show-row-number-column="true"
+                onrowselection={handleRowSelection}
+                selected-rows={selectedRows}
+                >
+            </lightning-datatable>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error: {error}</p>
+        </template>
+    </div>
+</div>
+      
+    </lightning-quick-action-panel>
+</template>

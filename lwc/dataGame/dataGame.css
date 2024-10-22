@@ -1,0 +1,12 @@
+.conf-label {
+    display: inline-block;
+    text-align: right;
+    width: 90px;
+    padding-right: 1em;
+}
+.conf-value {
+    display: inline-block;
+}
+.conf-line {
+    margin-top: 3px;
+}

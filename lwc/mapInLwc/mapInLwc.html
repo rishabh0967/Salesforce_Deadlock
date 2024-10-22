@@ -1,0 +1,15 @@
+<template>
+<lightning-card title="Map">
+    <div class="slds-m-around_xx-small">
+        <template if:true={mapMarkers}>
+        <lightning-map
+        map-markers={mapMarkers}
+        markers-title={accountLocation}
+        onmarkerselect={handleMarkerSelect}
+        selected-marker-value={selectedMarker}
+    >
+    </lightning-map>
+</template>
+</div>
+</lightning-card>    
+</template>

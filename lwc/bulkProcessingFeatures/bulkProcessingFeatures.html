@@ -1,0 +1,65 @@
+<template>
+
+    <lightning-card title="Bulk Processing Features">
+        <div class="slds-m-around_xx-small">
+            `
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-3">
+                <span>
+                    <lightning-record-edit-form
+                     object-api-name="Contact"
+                     onload= {handleOnLoad}
+                    >
+                    <lightning-input-field field-name={fields.nameField}></lightning-input-field>
+                    <lightning-input-field field-name={fields.titleField}></lightning-input-field>
+                    <lightning-input-field field-name={fields.emailField}></lightning-input-field>
+                    <lightning-input-field field-name={fields.owner}></lightning-input-field>
+                    </lightning-record-edit-form>
+                    <div class="slds-m-around_xx-small">
+                        <lightning-button  class = "slds-m-around_xx-small" onclick={handleSearch} type="Search" variant="brand"  label="Search" ></lightning-button>
+
+                    </div>
+                </span>
+                </div>
+
+                <div class="slds-col slds-size_2-of-3">
+                
+                    <div if:false={isLoaded}>
+                        <lightning-spinner variant="brand" alternative-text="Loading" size="medium"></lightning-spinner>
+                      </div>
+                    <span>
+                <div class="slds-card__body slds-card__body_inner slds-scrollable_x" style="width: 100rem;">
+                <div if:true={getContactsData} >
+                <div class="slds-border_left slds-border_right slds-border_bottom slds-border_top custom-datatable">
+
+                    <c-custom-datatype-global
+                    key-field="id"
+                    data={getContactsData}
+                    columns={columns}
+                    draft-values={draftValues}
+                    onsave={handleSave}
+                    oncancel={handleCancel}
+                    onrowselection={handleRowSelection}
+                     oncellchange={handlecellChange}
+                     selected-rows={selectedRows}
+                    suppress-bottom-bar="true"
+                     >
+                    </c-custom-datatype-global>
+               
+                </div>
+                </div>
+                <!-- <div if:false={getContactsData.length} class="slds-p-top_small custom-height slds-border_left slds-border_right slds-border_bottom slds-border_top">
+                    <c-illustration-no-data></c-illustration-no-data>
+                </div> -->
+                  </div>
+               <p slot="footer" class="slds-text-align_right">
+                <lightning-button variant="brand" label="Create Contacts" title="Create Contacts" class="slds-m-left_x-small" type="submit" onclick={handleCreateContacts}  disabled={isButtonDisabled}></lightning-button>
+              </p>
+                    </span>
+                   
+                    </div>
+                </div>
+      </div>
+    </lightning-card>
+    
+</template>
